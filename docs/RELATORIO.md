@@ -15,6 +15,16 @@ A implementação foi mesclada por [PR #1](https://github.com/bingxyi/cloud-pipe
 
 ## Infraestrutura e verificação remota
 
+```mermaid
+flowchart LR
+    PR[Branch e PR] --> CI[pytest e build]
+    CI --> MAIN[Merge na main]
+    MAIN --> GHCR[GHCR por SHA]
+    GHCR --> CD[CD apos CI aprovada]
+    CD --> EC2[EC2 Ubuntu e Docker]
+    EC2 --> DB[SQLite no volume cloud-tasks-data]
+```
+
 Conta AWS `109347287884`, região `us-east-1`. EC2 Ubuntu 24.04 `i-0c6f23086bc98c45e`, tipo `t3.micro`, IP `54.198.190.67`, Security Group `sg-09352ffbaa35709b2`. Cloud-init concluiu e Docker 29.1.3 foi confirmado via SSH.
 
 Verificações após o deploy: `/health` respondeu status `ok`; `/version` respondeu `cloud-tasks-api` / `1.1.0`; DELETE respondeu 204 e, repetido para o mesmo ID, 404. A tarefa ID 1, título `Evidencia persistencia 20261116-113828`, permaneceu disponível após substituir o contêiner com `scripts/deploy.sh` usando a mesma imagem e volume `cloud-tasks-data`. IDs dos contêineres antes/depois, imagem e respostas estão em [evidencia-ec2.json](evidencia-ec2.json).
