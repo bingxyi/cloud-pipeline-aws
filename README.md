@@ -16,7 +16,7 @@
 - EC2 `i-0c6f23086bc98c45e`, região `us-east-1`, IP `54.198.190.67`; Docker 29.1.3. Regras verificadas ao final: SSH 22 somente de `189.6.11.151/32` e HTTP 80 de `0.0.0.0/0`; a regra temporária do runner foi removida.
 - Ambiente GitHub `production`, secrets e variables necessários ao deploy foram configurados sem incluir valores neste repositório.
 
-Custos ainda não foram inspecionados. A instância permanece ligada para demonstração; revisar custos e encerrar recursos após a apresentação.
+Custos consultados: US$ 0,08848 estimados na conta em 15–16/11, sem atribuicao exclusiva ao projeto. A instancia permanece ligada para apresentacao por solicitacao do responsavel. Veja a [auditoria dos sete criterios](docs/AUDITORIA_FINAL.md).
 
 ## API e testes
 
@@ -41,8 +41,19 @@ curl --fail http://localhost:8080/health
 
 ## Entrega restante
 
-- [ ] Conferir custos AWS e registrar estimativa observada.
-- [ ] Apresentar e guardar as evidências exigidas pelo curso.
+- [x] Custos estimados consultados e documentados na auditoria final.
+- [x] Evidencias coletadas e roteiro/slides preparados; apresentacao pelo responsavel ainda futura.
 - [ ] Após a apresentação, encerrar a EC2 e revisar volumes e IPs remanescentes; documentar a verificação.
 
 Mais contexto e registro de execução: [relatório](docs/RELATORIO.md) e [próximos passos](docs/PROXIMOS_PASSOS.md). Procedimentos AWS/GitHub: [docs/CONFIGURACAO.md](docs/CONFIGURACAO.md).
+
+## Pacote final de apresentacao
+
+- [Matriz dos sete criterios e evidencias](docs/AUDITORIA_FINAL.md).
+- [Roteiro de demonstracao de ate cinco minutos](docs/APRESENTACAO.md).
+- [Slides HTML](docs/apresentacao.html): baixar/abrir no navegador local; usar as setas para navegar e Ctrl+P para imprimir ou salvar PDF.
+- [Respostas coletadas de AWS, GitHub, GHCR, HTTP e testes](docs/evidencias/), com data de coleta e sem credenciais.
+
+As evidencias documentam instantes especificos da execucao. Consultar a aba Actions
+para o ultimo commit publicado. A apresentacao e o envio ao Moodle sao realizados
+pelo responsavel; a API permanece ligada para essa demonstracao.

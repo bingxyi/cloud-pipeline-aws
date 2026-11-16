@@ -1,0 +1,529 @@
+{
+  "CapturedAt": "2026-11-16T14:54:15.1925820Z",
+  "PR": {
+    "baseRefName": "main",
+    "comments": [
+      {
+        "id": "IC_kwDOVv6fHM8AAAABnG24ow",
+        "author": {
+          "login": "bingxyi"
+        },
+        "authorAssociation": "OWNER",
+        "body": "Self-review: checked the task deletion and version changes; CI checks passed.",
+        "createdAt": "2026-11-16T14:34:55Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/bingxyi/cloud-pipeline-aws/pull/1#issuecomment-6919403683",
+        "viewerDidAuthor": true
+      }
+    ],
+    "headRefName": "feature/delete-endpoint",
+    "mergeCommit": {
+      "oid": "fedf0295356db273686130be3bdf76c3c5d5d87e"
+    },
+    "mergedAt": "2026-11-16T14:36:30Z",
+    "number": 1,
+    "state": "MERGED",
+    "url": "https://github.com/bingxyi/cloud-pipeline-aws/pull/1"
+  },
+  "Runs": [
+    {
+      "conclusion": "success",
+      "databaseId": 43886754600,
+      "event": "pull_request",
+      "headSha": "806d15efe6dec77dd2602c985b222dcd865fe55d",
+      "jobs": [
+        {
+          "completedAt": "2026-11-16T14:32:28Z",
+          "conclusion": "success",
+          "databaseId": 133366859055,
+          "name": "test",
+          "startedAt": "2026-11-16T14:32:17Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-11-16T14:32:19Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-11-16T14:32:18Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:20Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "startedAt": "2026-11-16T14:32:19Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:22Z",
+              "conclusion": "success",
+              "name": "Run actions/setup-python@v5",
+              "number": 3,
+              "startedAt": "2026-11-16T14:32:20Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:24Z",
+              "conclusion": "success",
+              "name": "Install dependencies",
+              "number": 4,
+              "startedAt": "2026-11-16T14:32:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:25Z",
+              "conclusion": "success",
+              "name": "Run automated tests",
+              "number": 5,
+              "startedAt": "2026-11-16T14:32:24Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:25Z",
+              "conclusion": "success",
+              "name": "Test temporary runner SSH access",
+              "number": 6,
+              "startedAt": "2026-11-16T14:32:25Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:25Z",
+              "conclusion": "success",
+              "name": "Post Run actions/setup-python@v5",
+              "number": 11,
+              "startedAt": "2026-11-16T14:32:25Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:26Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 12,
+              "startedAt": "2026-11-16T14:32:25Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:26Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 13,
+              "startedAt": "2026-11-16T14:32:26Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43886754600/job/133366859055"
+        },
+        {
+          "completedAt": "2026-11-16T14:32:53Z",
+          "conclusion": "success",
+          "databaseId": 133367008109,
+          "name": "image",
+          "startedAt": "2026-11-16T14:32:31Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-11-16T14:32:35Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-11-16T14:32:32Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:36Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "startedAt": "2026-11-16T14:32:35Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:43Z",
+              "conclusion": "success",
+              "name": "Run docker/setup-buildx-action@v3",
+              "number": 3,
+              "startedAt": "2026-11-16T14:32:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:49Z",
+              "conclusion": "success",
+              "name": "Build image (also on pull requests)",
+              "number": 4,
+              "startedAt": "2026-11-16T14:32:43Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:49Z",
+              "conclusion": "skipped",
+              "name": "Normalize image reference",
+              "number": 5,
+              "startedAt": "2026-11-16T14:32:49Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:49Z",
+              "conclusion": "skipped",
+              "name": "Authenticate to GHCR (main only)",
+              "number": 6,
+              "startedAt": "2026-11-16T14:32:49Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:49Z",
+              "conclusion": "skipped",
+              "name": "Publish immutable image (main only)",
+              "number": 7,
+              "startedAt": "2026-11-16T14:32:49Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:50Z",
+              "conclusion": "success",
+              "name": "Post Build image (also on pull requests)",
+              "number": 12,
+              "startedAt": "2026-11-16T14:32:49Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:52Z",
+              "conclusion": "success",
+              "name": "Post Run docker/setup-buildx-action@v3",
+              "number": 13,
+              "startedAt": "2026-11-16T14:32:50Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:52Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 14,
+              "startedAt": "2026-11-16T14:32:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:32:52Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-11-16T14:32:52Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43886754600/job/133367008109"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43886754600",
+      "workflowName": "CI - tests and image"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 43889934062,
+      "event": "push",
+      "headSha": "57e2869681c5844205272fc67c3733817f5cd390",
+      "jobs": [
+        {
+          "completedAt": "2026-11-16T14:50:19Z",
+          "conclusion": "success",
+          "databaseId": 133378073422,
+          "name": "test",
+          "startedAt": "2026-11-16T14:50:11Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-11-16T14:50:13Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-11-16T14:50:12Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:13Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "startedAt": "2026-11-16T14:50:13Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:14Z",
+              "conclusion": "success",
+              "name": "Run actions/setup-python@v5",
+              "number": 3,
+              "startedAt": "2026-11-16T14:50:13Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:17Z",
+              "conclusion": "success",
+              "name": "Install dependencies",
+              "number": 4,
+              "startedAt": "2026-11-16T14:50:14Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:17Z",
+              "conclusion": "success",
+              "name": "Run automated tests",
+              "number": 5,
+              "startedAt": "2026-11-16T14:50:17Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:17Z",
+              "conclusion": "success",
+              "name": "Test temporary runner SSH access",
+              "number": 6,
+              "startedAt": "2026-11-16T14:50:17Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:18Z",
+              "conclusion": "success",
+              "name": "Post Run actions/setup-python@v5",
+              "number": 11,
+              "startedAt": "2026-11-16T14:50:17Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:18Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 12,
+              "startedAt": "2026-11-16T14:50:18Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:18Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 13,
+              "startedAt": "2026-11-16T14:50:18Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43889934062/job/133378073422"
+        },
+        {
+          "completedAt": "2026-11-16T14:50:54Z",
+          "conclusion": "success",
+          "databaseId": 133378190348,
+          "name": "image",
+          "startedAt": "2026-11-16T14:50:22Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-11-16T14:50:26Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-11-16T14:50:23Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:27Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "startedAt": "2026-11-16T14:50:26Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:33Z",
+              "conclusion": "success",
+              "name": "Run docker/setup-buildx-action@v3",
+              "number": 3,
+              "startedAt": "2026-11-16T14:50:27Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:38Z",
+              "conclusion": "success",
+              "name": "Build image (also on pull requests)",
+              "number": 4,
+              "startedAt": "2026-11-16T14:50:33Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:38Z",
+              "conclusion": "success",
+              "name": "Normalize image reference",
+              "number": 5,
+              "startedAt": "2026-11-16T14:50:38Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:39Z",
+              "conclusion": "success",
+              "name": "Authenticate to GHCR (main only)",
+              "number": 6,
+              "startedAt": "2026-11-16T14:50:38Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:47Z",
+              "conclusion": "success",
+              "name": "Publish immutable image (main only)",
+              "number": 7,
+              "startedAt": "2026-11-16T14:50:39Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:48Z",
+              "conclusion": "success",
+              "name": "Post Publish immutable image (main only)",
+              "number": 10,
+              "startedAt": "2026-11-16T14:50:47Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:49Z",
+              "conclusion": "success",
+              "name": "Post Authenticate to GHCR (main only)",
+              "number": 11,
+              "startedAt": "2026-11-16T14:50:48Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:50Z",
+              "conclusion": "success",
+              "name": "Post Build image (also on pull requests)",
+              "number": 12,
+              "startedAt": "2026-11-16T14:50:49Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:51Z",
+              "conclusion": "success",
+              "name": "Post Run docker/setup-buildx-action@v3",
+              "number": 13,
+              "startedAt": "2026-11-16T14:50:50Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:51Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 14,
+              "startedAt": "2026-11-16T14:50:51Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:50:51Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-11-16T14:50:51Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43889934062/job/133378190348"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43889934062",
+      "workflowName": "CI - tests and image"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 43890085299,
+      "event": "workflow_run",
+      "headSha": "57e2869681c5844205272fc67c3733817f5cd390",
+      "jobs": [
+        {
+          "completedAt": "2026-11-16T14:51:17Z",
+          "conclusion": "success",
+          "databaseId": 133378603940,
+          "name": "deploy",
+          "startedAt": "2026-11-16T14:51:02Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-11-16T14:51:04Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-11-16T14:51:03Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:51:04Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "startedAt": "2026-11-16T14:51:04Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:51:04Z",
+              "conclusion": "success",
+              "name": "Set up SSH credentials and verify host identity",
+              "number": 3,
+              "startedAt": "2026-11-16T14:51:04Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:51:08Z",
+              "conclusion": "success",
+              "name": "Allow this runner temporary SSH access",
+              "number": 4,
+              "startedAt": "2026-11-16T14:51:04Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:51:13Z",
+              "conclusion": "success",
+              "name": "Deploy immutable image",
+              "number": 5,
+              "startedAt": "2026-11-16T14:51:08Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:51:13Z",
+              "conclusion": "success",
+              "name": "Verify remote endpoint",
+              "number": 6,
+              "startedAt": "2026-11-16T14:51:13Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:51:15Z",
+              "conclusion": "success",
+              "name": "Remove temporary runner SSH access",
+              "number": 7,
+              "startedAt": "2026-11-16T14:51:13Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:51:15Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 14,
+              "startedAt": "2026-11-16T14:51:15Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-11-16T14:51:15Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-11-16T14:51:15Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43890085299/job/133378603940"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43890085299",
+      "workflowName": "CD - deploy EC2"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "Id": "950a368472093b76a618db02318ac2e7ee0f7399473e589457eaa1ed35faf1d4",
+  "Image": "ghcr.io/bingxyi/cloud-pipeline-aws:57e2869681c5844205272fc67c3733817f5cd390",
+  "User": "appuser",
+  "Mounts": [
+    {
+      "Destination": "/data",
+      "Driver": "local",
+      "Mode": "z",
+      "Name": "cloud-tasks-data",
+      "Propagation": "",
+      "RW": true,
+      "Source": "/var/lib/docker/volumes/cloud-tasks-data/_data",
+      "Type": "volume"
+    }
+  ]
+}
