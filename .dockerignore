@@ -5,3 +5,8 @@ __pycache__/
 .venv/
 *.db
 .env
+*.pem
+*.key
+.aws/
+.codex/
+.tools/

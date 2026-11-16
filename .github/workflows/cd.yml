@@ -11,6 +11,7 @@ jobs:
     # Only successful CI runs started by pushes to main.
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     environment: production
     steps:
       - uses: actions/checkout@v4
@@ -26,6 +27,15 @@ jobs:
           printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
           printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/id_ed25519 ~/.ssh/known_hosts
+      - name: Allow this runner temporary SSH access
+        id: runner_ssh
+        if: ${{ vars.EC2_SECURITY_GROUP_ID != '' }}
+        env:
+          EC2_SECURITY_GROUP_ID: ${{ vars.EC2_SECURITY_GROUP_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+        run: bash scripts/runner-ssh-access.sh open
       - name: Deploy immutable image
         env:
           EC2_HOST: ${{ secrets.EC2_HOST }}
@@ -37,8 +47,17 @@ jobs:
           # Expected values are host/user, not arbitrary SSH options.
           [[ "$EC2_HOST" =~ ^[a-zA-Z0-9.-]+$ ]]
           [[ "$EC2_USER" =~ ^[a-z_][a-z0-9_-]*$ ]]
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes "${EC2_USER}@${EC2_HOST}"             "bash -s -- '${IMAGE}'" < scripts/deploy.sh
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ServerAliveInterval=15 -o ServerAliveCountMax=2 "${EC2_USER}@${EC2_HOST}"             "bash -s -- '${IMAGE}'" < scripts/deploy.sh
       - name: Verify remote endpoint
         env:
           EC2_HOST: ${{ secrets.EC2_HOST }}
-        run: curl --fail --show-error --retry 10 --retry-delay 3 "http://${EC2_HOST}/health"
+        run: curl --fail --show-error --connect-timeout 5 --max-time 10 --retry 10 --retry-delay 3 "http://${EC2_HOST}/health"
+      - name: Remove temporary runner SSH access
+        if: ${{ always() && steps.runner_ssh.outputs.rule_id != '' }}
+        env:
+          EC2_SECURITY_GROUP_ID: ${{ vars.EC2_SECURITY_GROUP_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+          RULE_ID: ${{ steps.runner_ssh.outputs.rule_id }}
+        run: bash scripts/runner-ssh-access.sh close "$RULE_ID"

@@ -1,0 +1,37 @@
+model = "gpt-6.1-sol"
+model_reasoning_effort = "medium"
+
+[profiles.sol]
+model = "gpt-6.1-sol"
+model_reasoning_effort = "medium"
+
+[profiles.terra]
+model = "gpt-6.1-terra"
+model_reasoning_effort = "medium"
+
+[profiles.luna]
+model = "gpt-6-luna"
+model_reasoning_effort = "low"
+
+[agents]
+max_threads = 3
+max_depth = 1
+
+[mcp_servers.docker-desktop]
+command = "docker"
+args = ["mcp", "gateway", "run"]
+startup_timeout_sec = 15
+tool_timeout_sec = 45
+
+[mcp_servers.browser]
+command = "npx"
+args = ["-y", "@playwright/mcp@latest", "--isolated"]
+startup_timeout_sec = 20
+tool_timeout_sec = 45
+
+[mcp_servers.aws-toolkit]
+command = "uvx"
+args = ["awslabs.aws-api-mcp-server@latest"]
+env = { AWS_REGION = "us-east-1", AWS_DEFAULT_REGION = "us-east-1" }
+startup_timeout_sec = 20
+tool_timeout_sec = 45

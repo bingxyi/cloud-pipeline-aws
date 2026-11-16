@@ -6,7 +6,7 @@ services:
     environment:
       DB_PATH: /data/tasks.db
     volumes:
-      - task_data:/data
+      - cloud-tasks-data:/data
     restart: unless-stopped
 volumes:
-  task_data:
+  cloud-tasks-data:

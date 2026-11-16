@@ -19,6 +19,8 @@ jobs:
         run: pip install -r requirements-dev.txt
       - name: Run automated tests
         run: python -m pytest -q
+      - name: Test temporary runner SSH access
+        run: bash tests/test_runner_ssh_access.sh
   image:
     needs: test
     runs-on: ubuntu-latest
