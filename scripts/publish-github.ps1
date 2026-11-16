@@ -2,13 +2,29 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 Set-Location (Split-Path -Parent $PSScriptRoot)
 
+# Trust this exact project for this process and its gh/git children only.
+# The working copy may have been created by the Codex sandbox Windows account.
+# Preserve inherited Git settings; never trust every repository or change globals.
+$configCount = 0
+if ($env:GIT_CONFIG_COUNT) {
+    if (-not [int]::TryParse($env:GIT_CONFIG_COUNT, [ref]$configCount) -or $configCount -lt 0) {
+        throw 'Invalid inherited GIT_CONFIG_COUNT.'
+    }
+}
+$projectPath = (Get-Location).Path.Replace('\', '/')
+Set-Item -Path "Env:GIT_CONFIG_KEY_$configCount" -Value 'safe.directory'
+Set-Item -Path "Env:GIT_CONFIG_VALUE_$configCount" -Value $projectPath
+$env:GIT_CONFIG_COUNT = [string]($configCount + 1)
+
 function Invoke-Checked {
     param([string]$Program, [string[]]$Arguments)
     & $Program @Arguments
     if ($LASTEXITCODE -ne 0) { throw "$Program failed (exit $LASTEXITCODE)." }
 }
 
-if ((git remote get-url origin) -cne 'https://github.com/bingxyi/cloud-pipeline-aws.git' -or $LASTEXITCODE -ne 0) {
+$originUrl = git remote get-url origin
+if ($LASTEXITCODE -ne 0) { throw 'Git could not read origin; see the Git error above.' }
+if ($originUrl -cne 'https://github.com/bingxyi/cloud-pipeline-aws.git') {
     throw 'Unexpected origin URL.'
 }
 $identity = gh api user --jq .login
