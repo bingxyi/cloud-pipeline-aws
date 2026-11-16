@@ -2,8 +2,6 @@
 
 ## Integração e implantação contínuas de uma API em nuvem
 
-**Rafael Bitu Castro de Abreu · RA22301190 · Engenharia da Computação**
-
 Este projeto estuda a relação entre versionamento, testes automatizados,
 conteinerização e implantação remota de uma API de tarefas. O problema central
 é estabelecer uma cadeia verificável entre uma alteração no código, a imagem
