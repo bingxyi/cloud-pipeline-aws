@@ -1,0 +1,25 @@
+{
+  "CapturedAt": "2026-11-16T14:55:41.5441624Z",
+  "Health": {
+    "Status": 200,
+    "Body": {
+      "status": "ok"
+    }
+  },
+  "Version": {
+    "Status": 200,
+    "Body": {
+      "service": "cloud-tasks-api",
+      "version": "1.1.0"
+    }
+  },
+  "Tasks": [
+    {
+      "done": false,
+      "id": 1,
+      "title": "Evidencia persistencia 20261116-113828"
+    }
+  ],
+  "AnonymousRegistryAccess": true,
+  "Image": "ghcr.io/bingxyi/cloud-pipeline-aws:57e2869681c5844205272fc67c3733817f5cd390"
+}

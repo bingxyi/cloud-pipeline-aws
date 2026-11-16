@@ -1,0 +1,222 @@
+{
+  "CapturedAt": "2026-11-16T14:56:49.4135061Z",
+  "Account": "109347287884",
+  "Region": "us-east-1",
+  "Instances": [
+    {
+      "Id": "i-0c6f23086bc98c45e",
+      "State": "running",
+      "Type": "t3.micro",
+      "Image": "ami-08b275ac6cc5dbefb",
+      "PublicIp": "54.198.190.67",
+      "KeyName": "cloud-pipeline-20261116012139-ce0b38c4",
+      "Groups": [
+        "sg-09352ffbaa35709b2"
+      ]
+    }
+  ],
+  "SecurityGroups": [
+    {
+      "Id": "sg-09352ffbaa35709b2",
+      "Name": "cloud-pipeline-20261116012139-ce0b38c4",
+      "Vpc": "vpc-0cc72263e870653f0",
+      "Ingress": [
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 80,
+          "ToPort": 80,
+          "UserIdGroupPairs": [],
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": []
+        },
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 22,
+          "ToPort": 22,
+          "UserIdGroupPairs": [],
+          "IpRanges": [
+            {
+              "CidrIp": "189.6.11.151/32"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": []
+        }
+      ]
+    },
+    {
+      "Id": "sg-0fbeb6ac261e3531a",
+      "Name": "default",
+      "Vpc": "vpc-0cc72263e870653f0",
+      "Ingress": [
+        {
+          "IpProtocol": "-1",
+          "UserIdGroupPairs": [
+            {
+              "UserId": "109347287884",
+              "GroupId": "sg-0fbeb6ac261e3531a"
+            }
+          ],
+          "IpRanges": [],
+          "Ipv6Ranges": [],
+          "PrefixListIds": []
+        }
+      ]
+    }
+  ],
+  "Network": {
+    "Vpcs": [
+      {
+        "Id": "vpc-0cc72263e870653f0",
+        "State": "available",
+        "Default": true,
+        "Cidr": "172.31.0.0/16"
+      }
+    ],
+    "Subnets": [
+      {
+        "Id": "subnet-039178f383163b95c",
+        "AZ": "us-east-1c",
+        "State": "available",
+        "FreeIps": 4090,
+        "AutoPublicIp": true
+      },
+      {
+        "Id": "subnet-056c86a77f0b451e9",
+        "AZ": "us-east-1d",
+        "State": "available",
+        "FreeIps": 4091,
+        "AutoPublicIp": true
+      },
+      {
+        "Id": "subnet-004efb94ab1dd5860",
+        "AZ": "us-east-1e",
+        "State": "available",
+        "FreeIps": 4091,
+        "AutoPublicIp": true
+      },
+      {
+        "Id": "subnet-0259856f0245766fa",
+        "AZ": "us-east-1b",
+        "State": "available",
+        "FreeIps": 4091,
+        "AutoPublicIp": true
+      },
+      {
+        "Id": "subnet-092408737f29e1605",
+        "AZ": "us-east-1a",
+        "State": "available",
+        "FreeIps": 4091,
+        "AutoPublicIp": true
+      },
+      {
+        "Id": "subnet-08d2e5bd714f00c8a",
+        "AZ": "us-east-1f",
+        "State": "available",
+        "FreeIps": 4091,
+        "AutoPublicIp": true
+      }
+    ],
+    "RouteTables": [
+      {
+        "Id": "rtb-06ea29fb1c434fb8c",
+        "Associations": [
+          {
+            "Main": true,
+            "RouteTableAssociationId": "rtbassoc-0ca7e63edf68cb723",
+            "RouteTableId": "rtb-06ea29fb1c434fb8c",
+            "AssociationState": {
+              "State": "associated"
+            }
+          }
+        ],
+        "Routes": [
+          {
+            "DestinationCidrBlock": "172.31.0.0/16",
+            "GatewayId": "local",
+            "Origin": "CreateRouteTable",
+            "State": "active"
+          },
+          {
+            "DestinationCidrBlock": "0.0.0.0/0",
+            "GatewayId": "igw-0902b89d999c7e998",
+            "Origin": "CreateRoute",
+            "State": "active"
+          }
+        ]
+      }
+    ],
+    "InternetGateways": [
+      {
+        "Id": "igw-0902b89d999c7e998",
+        "Attachments": [
+          {
+            "State": "available",
+            "VpcId": "vpc-0cc72263e870653f0"
+          }
+        ]
+      }
+    ]
+  },
+  "Ubuntu2404Candidates": [
+    {
+      "Id": "ami-08b275ac6cc5dbefb",
+      "Name": "ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20261108",
+      "Owner": "099720109477",
+      "Created": "2026-11-09T19:24:50Z",
+      "RootDevice": "/dev/sda1"
+    }
+  ],
+  "InstanceTypeOfferings": [
+    {
+      "Type": "t2.micro",
+      "AZ": "us-east-1d"
+    },
+    {
+      "Type": "t3.micro",
+      "AZ": "us-east-1f"
+    },
+    {
+      "Type": "t3.micro",
+      "AZ": "us-east-1b"
+    },
+    {
+      "Type": "t3.micro",
+      "AZ": "us-east-1d"
+    },
+    {
+      "Type": "t2.micro",
+      "AZ": "us-east-1b"
+    },
+    {
+      "Type": "t3.micro",
+      "AZ": "us-east-1c"
+    },
+    {
+      "Type": "t3.micro",
+      "AZ": "us-east-1a"
+    },
+    {
+      "Type": "t2.micro",
+      "AZ": "us-east-1c"
+    },
+    {
+      "Type": "t2.micro",
+      "AZ": "us-east-1e"
+    },
+    {
+      "Type": "t2.micro",
+      "AZ": "us-east-1a"
+    },
+    {
+      "Type": "t2.micro",
+      "AZ": "us-east-1f"
+    }
+  ],
+  "Note": "Oferta regional nao comprova permissao do Lab nem capacidade no momento do lancamento. Nenhum recurso criado."
+}

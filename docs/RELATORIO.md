@@ -31,12 +31,12 @@ Verificações após o deploy: `/health` respondeu status `ok`; `/version` respo
 
 A imagem implantada foi `ghcr.io/bingxyi/cloud-pipeline-aws:fedf0295356db273686130be3bdf76c3c5d5d87e`, digest `sha256:ffc8f538af5aded1bafa37990154782112803de8faf162a8a3e0615d1fb6af7e`.
 
-Ao final da verificação, as regras do Security Group eram SSH 22 de `189.6.11.151/32` e HTTP 80 de `0.0.0.0/0`; a regra temporária do runner foi removida. A instância permanece ligada para demonstração. Custos não foram inspecionados e a limpeza após a apresentação está pendente.
+Ao final da verificação, as regras do Security Group eram SSH 22 de `189.6.11.151/32` e HTTP 80 de `0.0.0.0/0`; a regra temporária do runner foi removida. A instância permanece ligada para demonstração. Cost Explorer: US$ 0,08848 estimados na conta em 15–16/11; valor parcial, sujeito a consolidacao, nao exclusivo deste projeto. Limpeza adiada para depois da apresentacao por solicitacao do responsavel.
 
 ## Histórico e pendências
 
 O manifest da imagem base foi consultado anonimamente na EC2 com configuracao Docker vazia antes do deploy.
 
-- [ ] Inspecionar e registrar custos AWS.
+- [x] Consultar e registrar custos estimados da conta; detalhamento em [AUDITORIA_FINAL.md](AUDITORIA_FINAL.md).
 - [ ] Realizar apresentação e manter evidências da entrega.
 - [ ] Encerrar a EC2 após a demonstração e verificar volumes e IPs restantes.

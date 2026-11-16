@@ -1,0 +1,86 @@
+{
+  "CapturedAt": "2026-11-16T14:54:19.9169626Z",
+  "Region": "us-east-1",
+  "Instance": {
+    "Id": "i-0c6f23086bc98c45e",
+    "State": "running",
+    "Type": "t3.micro",
+    "Image": "ami-08b275ac6cc5dbefb",
+    "Subnet": "subnet-039178f383163b95c",
+    "Ip": "54.198.190.67",
+    "Volumes": [
+      "vol-0c55e3de57a1447b7"
+    ],
+    "Metadata": {
+      "State": "applied",
+      "HttpTokens": "required",
+      "HttpPutResponseHopLimit": 2,
+      "HttpEndpoint": "enabled",
+      "HttpProtocolIpv6": "disabled",
+      "InstanceMetadataTags": "disabled"
+    }
+  },
+  "Ingress": [
+    {
+      "Protocol": "tcp",
+      "From": 22,
+      "To": 22,
+      "Cidr": "189.6.11.151/32"
+    },
+    {
+      "Protocol": "tcp",
+      "From": 80,
+      "To": 80,
+      "Cidr": "0.0.0.0/0"
+    }
+  ],
+  "Volumes": {
+    "Id": "vol-0c55e3de57a1447b7",
+    "SizeGiB": 8,
+    "Type": "gp3",
+    "Encrypted": true,
+    "State": "in-use",
+    "Attachments": [
+      {
+        "Instance": "i-0c6f23086bc98c45e",
+        "DeleteOnTermination": true
+      }
+    ]
+  },
+  "ElasticAddresses": null,
+  "Costs": {
+    "ResultsByTime": [
+      {
+        "TimePeriod": {
+          "Start": "2026-11-15",
+          "End": "2026-11-16"
+        },
+        "Total": {
+          "UnblendedCost": {
+            "Amount": "0.0408888848",
+            "Unit": "USD"
+          }
+        },
+        "Groups": [],
+        "Estimated": true
+      },
+      {
+        "TimePeriod": {
+          "Start": "2026-11-16",
+          "End": "2026-11-17"
+        },
+        "Total": {
+          "UnblendedCost": {
+            "Amount": "0.047590091",
+            "Unit": "USD"
+          }
+        },
+        "Groups": [],
+        "Estimated": true
+      }
+    ],
+    "DimensionValueAttributes": []
+  },
+  "CostScope": "Account-wide estimated UnblendedCost; not exclusively attributed to this project",
+  "Cleanup": "Keep instance online for presentation as requested; termination not executed"
+}

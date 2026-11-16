@@ -8,8 +8,8 @@ A EC2 `i-0c6f23086bc98c45e` (`us-east-1`, `54.198.190.67`) serve a aplicação. 
 
 ## Ações restantes
 
-1. Inspecionar custos AWS na conta `109347287884`, região `us-east-1`, e registrar os valores observados. Não há estimativa documentada ainda.
-2. Fazer a apresentação e guardar os links/evidências requeridos pelo curso.
+1. Custos consultados e registrados: US$ 0,08848 estimados para a conta em 15–16/11, sem atribuicao exclusiva ao projeto. Fontes e limitacoes em [AUDITORIA_FINAL.md](AUDITORIA_FINAL.md).
+2. Usar o [roteiro](APRESENTACAO.md), os [slides](apresentacao.html) e as evidencias em `evidencias/` na apresentacao. O pacote esta preparado; a apresentacao pelo responsavel ainda sera realizada.
 3. Depois da demonstração, encerrar a EC2. Verificar no console se há volumes ou IPs remanescentes e documentar o resultado antes de marcar a limpeza como concluída.
 
-A instância permanece ligada para a apresentação. Não declarar custos ou limpeza como concluídos sem consultar a conta.
+A instancia permanece ligada por solicitacao expressa do responsavel. Nao declarar a limpeza concluida antes de executar e verificar o encerramento.
