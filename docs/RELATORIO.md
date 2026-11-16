@@ -35,7 +35,7 @@ Ao final da verificação, as regras do Security Group eram SSH 22 de `189.6.11.
 
 ## Histórico e pendências
 
-Uma tentativa inicial de SSH pelo ambiente Codex não conseguiu ler a chave local. Depois, a conexão foi confirmada pelo usuário via SSH; não é uma falha atual do host. O manifest da imagem base foi consultado anonimamente na EC2 com configuração Docker vazia antes do deploy.
+O manifest da imagem base foi consultado anonimamente na EC2 com configuracao Docker vazia antes do deploy.
 
 - [ ] Inspecionar e registrar custos AWS.
 - [ ] Realizar apresentação e manter evidências da entrega.

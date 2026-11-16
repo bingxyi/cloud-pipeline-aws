@@ -3,7 +3,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 python -m pytest -q
 PYTHON_BIN=python bash tests/test_runner_ssh_access.sh
-for script in run-harness.sh scripts/*.sh; do
+for script in validate-local.sh scripts/*.sh; do
   bash -n "$script"
 done
 docker compose config -q
@@ -43,9 +43,9 @@ status, body = call('/health')
 assert status == 200 and json.loads(body)['status'] == 'ok'
 status, body = call('/version')
 assert status == 200 and json.loads(body) == {'service': 'cloud-tasks-api', 'version': '1.1.0'}
-status, body = call('/tasks', 'POST', {'title': 'harness persistence check'})
+status, body = call('/tasks', 'POST', {'title': 'local persistence check'})
 assert status == 201
-status, body = call('/tasks', 'POST', {'title': 'harness deletion check'})
+status, body = call('/tasks', 'POST', {'title': 'local deletion check'})
 assert status == 201
 task_id = json.loads(body)['id']
 assert call(f'/tasks/{task_id}', 'DELETE') == (204, b'')
@@ -67,9 +67,9 @@ for attempt in range(30):
         if attempt == 29:
             raise
         time.sleep(1)
-matches = [task for task in tasks if task['title'] == 'harness persistence check']
+matches = [task for task in tasks if task['title'] == 'local persistence check']
 assert len(matches) == 1
 with urlopen(Request(base + '/tasks/' + str(matches[0]['id']), method='DELETE'), timeout=5) as response:
     assert response.status == 204 and response.read() == b''
 PY
-echo "Harness passed; retained volume: ${project}_cloud-tasks-data"
+echo "Local validation passed; retained volume: ${project}_cloud-tasks-data"

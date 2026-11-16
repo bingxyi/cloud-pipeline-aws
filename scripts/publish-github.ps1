@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 Set-Location (Split-Path -Parent $PSScriptRoot)
 
 # Trust this exact project for this process and its gh/git children only.
-# The working copy may have been created by the Codex sandbox Windows account.
+# The working copy may have been created by another Windows account.
 # Preserve inherited Git settings; never trust every repository or change globals.
 $configCount = 0
 if ($env:GIT_CONFIG_COUNT) {
@@ -56,7 +56,7 @@ if (-not $prs) {
     try {
         $prBody = @'
 Implement DELETE /tasks/<id> with empty 204 or JSON 404, and GET /version.
-Add API tests and a local harness that checks container recreation persistence.
+Add API tests and a local validation script that checks container recreation persistence.
 Prepare EC2 provisioning/status inspection and CD access limited to the runner's temporary SSH /32 rule, with cleanup.
 
 Validation: nine API tests passed locally. PR CI must pass before merge.
