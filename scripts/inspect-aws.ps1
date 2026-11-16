@@ -27,7 +27,7 @@ function Read-AwsJson {
 # Only read operations. Do not read, print or copy credential files.
 $identity = Read-AwsJson -CommandArgs @('sts', 'get-caller-identity')
 if ($identity.Account -ne '109347287884') {
-    throw 'Conta diferente da indicada no prompt mestre; inventario interrompido.'
+    throw 'Conta diferente da configurada para o projeto; inventario interrompido.'
 }
 $instances = Read-AwsJson -CommandArgs @(
     'ec2', 'describe-instances',

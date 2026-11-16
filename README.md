@@ -22,7 +22,7 @@ Custos ainda não foram inspecionados. A instância permanece ligada para demons
 
 A API Flask usa SQLite. Suporta GET `/`, `/health`, `/version`, `/tasks`; POST `/tasks`; PATCH e DELETE `/tasks/<id>`. DELETE retorna 204 sem corpo ao excluir e 404 JSON para ID inexistente. `/version` retorna `{"service":"cloud-tasks-api","version":"1.1.0"}`. O contêiner armazena o banco em `/data/tasks.db`, montado no volume persistente `cloud-tasks-data`.
 
-Os nove testes de `tests/test_api.py` cobrem saúde, criação/listagem, validação, PATCH, DELETE 204/404, versão e persistência ao recriar a aplicação com o mesmo banco. Foram aprovados localmente e na CI. O harness local também aprovou build, smoke test e persistência ao recriar contêiner.
+Os nove testes de `tests/test_api.py` cobrem saúde, criação/listagem, validação, PATCH, DELETE 204/404, versão e persistência ao recriar a aplicação com o mesmo banco. Foram aprovados localmente e na CI. A validacao local também aprovou build, smoke test e persistência ao recriar contêiner.
 
 Para executar localmente com Python 3.12:
 
@@ -45,4 +45,4 @@ curl --fail http://localhost:8080/health
 - [ ] Apresentar e guardar as evidências exigidas pelo curso.
 - [ ] Após a apresentação, encerrar a EC2 e revisar volumes e IPs remanescentes; documentar a verificação.
 
-Mais contexto e registro de execução: [relatório](docs/RELATORIO.md), [retomada](docs/RETOMADA.md) e [próximos passos](docs/PROXIMOS_PASSOS.md). Procedimentos AWS/GitHub: [docs/CONFIGURACAO.md](docs/CONFIGURACAO.md).
+Mais contexto e registro de execução: [relatório](docs/RELATORIO.md) e [próximos passos](docs/PROXIMOS_PASSOS.md). Procedimentos AWS/GitHub: [docs/CONFIGURACAO.md](docs/CONFIGURACAO.md).

@@ -34,8 +34,8 @@ try {
         if (-not $bash) { throw 'Git Bash nao localizado.' }
         & $docker version
         if ($LASTEXITCODE -ne 0) { throw 'docker version falhou.' }
-        & $bash 'run-harness.sh'
-        if ($LASTEXITCODE -ne 0) { throw 'O harness falhou.' }
+        & $bash 'validate-local.sh'
+        if ($LASTEXITCODE -ne 0) { throw 'A validacao local falhou.' }
     } catch {
         Write-Warning "Validacao local falhou: $_"
         $failed = $true
