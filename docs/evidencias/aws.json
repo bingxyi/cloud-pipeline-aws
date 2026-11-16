@@ -82,5 +82,5 @@
     "DimensionValueAttributes": []
   },
   "CostScope": "Account-wide estimated UnblendedCost; not exclusively attributed to this project",
-  "Cleanup": "Keep instance online for presentation as requested; termination not executed"
+  "Cleanup": "Estado observado: instancia em execucao; encerramento nao observado nesta coleta."
 }
