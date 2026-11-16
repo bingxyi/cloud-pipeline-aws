@@ -1,0 +1,28 @@
+{
+  "CapturedAt": "2026-11-16T14:38:39.9895879Z",
+  "Health": {
+    "status": "ok"
+  },
+  "Version": {
+    "service": "cloud-tasks-api",
+    "version": "1.1.0"
+  },
+  "Task": {
+    "done": false,
+    "id": 1,
+    "title": "Evidencia persistencia 20261116-113828"
+  },
+  "ContainerBefore": "3f802cbff61c42f6b97eb2e4169dfcd1887ee78d67db4ff67ebab31d6d30b07a",
+  "ContainerAfter": "8ec1b19a784373b6a7b9807de493dc7de84fd2c506d19930c15fc5d8fd3811bb",
+  "Persisted": true,
+  "DeleteStatuses": [
+    204,
+    404
+  ],
+  "Image": "ghcr.io/bingxyi/cloud-pipeline-aws:fedf0295356db273686130be3bdf76c3c5d5d87e",
+  "ImageDigest": "sha256:ffc8f538af5aded1bafa37990154782112803de8faf162a8a3e0615d1fb6af7e",
+  "PullRequest": "https://github.com/bingxyi/cloud-pipeline-aws/pull/1",
+  "CI": "https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43887501389",
+  "CD": "https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43887665966",
+  "RunnerSshRuleRevoked": true
+}

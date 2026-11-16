@@ -1,53 +1,24 @@
 # Estado para retomada
 
-Atualizado em 2026-11-16. Este arquivo resume a sessao; nao representa uma
-compactacao tecnica do historico da interface.
+Atualizado em 2026-11-16. Projeto: `meu-cloud-pipeline`. Repositório [bingxyi/cloud-pipeline-aws](https://github.com/bingxyi/cloud-pipeline-aws). Responsável: Rafael Bitu Castro de Abreu, RA22301190, trabalho individual.
 
-## Orientacoes vigentes
+## Estado confirmado
 
-- Informar o plano antes de iniciar cada nova etapa.
-- Seguir master-prompt.md no diretorio pai, preservando trabalho ja feito.
-- Usuario autorizou commits/push/PR automatizados, sem Co-Authored-By. No Codex gh api user retorna 401; usar publicador no PowerShell autenticado.
-- Usuario autorizou acoes AWS; apresentar plano especifico antes de qualquer modificacao de recursos.
-- A janela original terminou em 2026-11-15 as 23:50; nao representa um prazo novo.
-- Nunca incluir chaves, tokens ou arquivos PEM em evidencias ou commits.
-- Credenciais e chave privada foram expostas no chat. Nao reutilizar valores do
-  historico. Substituir chave SSH autorizada antes de usa-la no deploy.
+- Informar o plano antes de iniciar cada nova etapa; publicacao automatica autorizada.
+- Nenhum commit pode conter Co-Authored-By (nem variacoes de grafia).
+- Nao reutilizar credenciais/chaves expostas no historico; usar apenas configuracao local atual.
+- O prazo original de 23:50 de 2026-11-15 ja passou; nao representa prazo novo.
 
-## Concluido e pendente
+- PR [#1](https://github.com/bingxyi/cloud-pipeline-aws/pull/1) mesclado no SHA `fedf0295356db273686130be3bdf76c3c5d5d87e`.
+- [CI do PR](https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43886754600), [CI da main](https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43887501389) e [CD](https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43887665966) aprovados para a implementação.
+- API em `http://54.198.190.67`: health `ok`; versão `cloud-tasks-api` 1.1.0; DELETE verificado com respostas 204 e 404.
+- Persistência EC2 verificada ao recriar o contêiner via `scripts/deploy.sh` usando a mesma imagem e o volume. A tarefa ID 1 sobreviveu. Evidência: [evidencia-ec2.json](evidencia-ec2.json).
+- AWS `109347287884`, `us-east-1`; EC2 `i-0c6f23086bc98c45e`, IP `54.198.190.67`, SG `sg-09352ffbaa35709b2`; Docker 29.1.3.
+- Regras finais verificadas no SG: SSH 22 de `189.6.11.151/32`, HTTP 80 público. Regra SSH temporária do runner removida.
+- Ambiente GitHub `production` e secrets/variables estão configurados. Não copiar valores secretos para arquivos ou mensagens.
 
-- Projeto ativo: meu-cloud-pipeline. Starter original permanece separado.
-- Responsavel: Rafael Bitu Castro de Abreu, RA22301190 (projeto individual). Repositorio: https://github.com/bingxyi/cloud-pipeline-aws; usuario confirma que o codigo ainda nao foi enviado.
-- DELETE retorna 204/404, GET `/version` retorna 1.1.0; nove testes locais passaram.
-- Validacao mais recente no host: pytest 9 passed em 0.73s; build da imagem Ubuntu/Python 3.12; smoke test de health/version/DELETE; persistencia comprovada apos recriar contêiner.
-- Containers e rede do harness foram removidos. Volume `cloud-tasks-smoke-535_cloud-tasks-data` mantido para inspecao; preservar e nao remover em limpeza automatica.
-- AWS: o inventario inicial somente leitura encontrou apenas o security group default. Depois, o host criou EC2 `i-0c6f23086bc98c45e`, IP `54.198.190.67`, SG `sg-09352ffbaa35709b2` em us-east-1.
-- `scripts/provision-aws.ps1` passou parser PowerShell e validacao offline AWS CLI; testes mockados de rede nao fizeram chamadas AWS. A consulta `-Status` no host confirmou instancia/tag e gerou `known_hosts` com chave publica obtida via console AWS autenticado. Usuario confirmou via SSH: cloud-init status done e Docker cliente/servidor 29.1.3 acessivel como ubuntu. App ainda nao implantada.
-- Validacao local nao cobre EC2: deploy e persistencia em instancia remota seguem pendentes. CI, GHCR e CD remotos tambem pendentes.
-- O interpretador local fica em `../.tools/python/cpython-3.12.13-windows-x86_64-none/python.exe`; venv `.venv` esta no projeto. Reproduzir com `.venv/Scripts/python.exe -m pytest -q` apos instalar `requirements-dev.txt`; `.venv` e ignorado pelo Git.
-- Codigo ainda nao enviado pelo usuario. Nenhuma CI remota, publicacao GHCR ou deploy foi verificado.
-- Nao afirmar branch local ou remoto sem verificar o historico atual. A publicacao automatizada foi autorizada, preservando branch feature e PR.
-- Nao copiar credenciais para o repositorio. Nao reutilizar chaves ou valores secretos do historico.
+## Trabalho restante
 
-## Proximo passo concreto
+A EC2 está ligada para a demonstração. Inspecionar custos, concluir apresentação e então encerrar a instância e revisar volumes/IPs remanescentes. Registrar o resultado da limpeza. Ver [PROXIMOS_PASSOS.md](PROXIMOS_PASSOS.md) e [RELATORIO.md](RELATORIO.md).
 
-Verificacao SSH abaixo concluida pelo usuario: cloud-init done e Docker cliente/servidor 29.1.3 acessivel como ubuntu. Proximo passo e a publicacao automatizada ao GitHub conforme PROXIMOS_PASSOS.md, com base na main e implementacao em feature/PR. Comando SSH usado:
-
-```powershell
-$s = Get-Content (Join-Path $env:USERPROFILE '.cloud-pipeline\cloud-pipeline-starter-state.json') -Raw | ConvertFrom-Json
-ssh.exe -i $s.KeyPath -o "UserKnownHostsFile=$($s.KnownHostsPath)" -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=10 "ubuntu@$($s.PublicIp)" "cloud-init status; docker version"
-```
-
-Nao repetir o provisionamento: a EC2 ja existe. A tentativa SSH feita no ambiente Codex falhou por permissao local sobre o arquivo da chave e nao comprova falha da chave nem da instancia.
-
-Para a publicacao automatizada ao GitHub, branch feature, PR e CI, seguir [PROXIMOS_PASSOS.md](PROXIMOS_PASSOS.md).
-
-Historico de proximo passo proposto (nao executado):
-
-No PowerShell do usuario, dentro de meu-cloud-pipeline:
-
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\inspect-aws.ps1
-```
-
-Esse procedimento foi uma proposta historica. A autorizacao AWS atual cobre as acoes necessarias ao projeto, respeitando o plano e o escopo informado pelo usuario.
+Histórico: a primeira tentativa de SSH pelo Codex não teve acesso local à chave; a conexão posterior foi confirmada pelo usuário via SSH. Essa tentativa antiga não indica falha atual.

@@ -1,71 +1,32 @@
-# Relatorio de entrega - Cloud Tasks API
+# Relatório de entrega — Cloud Tasks API
 
-## Identificacao e arquitetura
+## Identificação e resultado
 
-Responsavel: Rafael Bitu Castro de Abreu, RA22301190. Projeto individual.
-Repositorio: [bingxyi/cloud-pipeline-aws](https://github.com/bingxyi/cloud-pipeline-aws) (codigo ainda nao enviado pelo usuario).
-Responsabilidades individuais: implementacao da API e testes, container e validacao local, preparacao do pipeline e da infraestrutura, relatorio e entrega. A preparacao local nao significa que CI remota, publicacao, provisionamento ou deploy tenham ocorrido.
+Responsável: Rafael Bitu Castro de Abreu, RA22301190. Projeto individual. Repositório: [bingxyi/cloud-pipeline-aws](https://github.com/bingxyi/cloud-pipeline-aws).
 
-```mermaid
-flowchart LR
-    PR[Branch feature e PR] --> CI[pytest e build Docker]
-    CI --> Main[Merge na main]
-    Main --> GHCR[Imagem GHCR por SHA]
-    GHCR --> CD[CD apos CI aprovada]
-    CD --> EC2[EC2 Ubuntu e Docker]
-    EC2 --> DB[SQLite em cloud-tasks-data]
-```
+A implementação foi mesclada por [PR #1](https://github.com/bingxyi/cloud-pipeline-aws/pull/1) no commit `fedf0295356db273686130be3bdf76c3c5d5d87e`. A [CI do PR](https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43886754600), a [CI da main](https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43887501389) e o [CD](https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43887665966) foram aprovados. O CD implantou a imagem GHCR correspondente ao mesmo SHA.
 
-## Implementacao
+## Implementação
 
-- DELETE `/tasks/<id>` retorna 204 sem corpo ou 404 JSON.
-- GET `/version` retorna service `cloud-tasks-api` e version `1.1.0`.
-- Nove testes cobrem a API e persistencia apos recriar a aplicacao no mesmo banco.
-- Configuracao da CI define pytest, teste simulado de acesso SSH e build em PR; publicacao GHCR por SHA em push na main. Execucao remota pendente.
-- Configuracao do CD espera CI aprovada, usa o mesmo SHA e verifica `/health`; execucao remota pendente.
-- Usuario autorizou commits e publicacao automatizados. Base preparada em main e implementacao em feature/delete-endpoint, sem Co-Authored-By. Publicacao remota ainda pendente.
-- Host confirma que `scripts/provision-aws.ps1` criou Ubuntu 24.04 `t3.micro`: instancia `i-0c6f23086bc98c45e`, IP `54.198.190.67`, SG `sg-09352ffbaa35709b2`. `-Status` validou instancia/tag e gerou `known_hosts` com chave publica obtida pelo console AWS autenticado. Chave privada e estado ficam fora do repositorio.
-- Comando documentado: `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\provision-aws.ps1`. Perfil default; aceita `-Profile`, `-AdminCidr`, `-StatePath` e `-Status`. Estado existente direciona consultas e impede criacao duplicada; falha parcial sem `InstanceId` exige recuperacao manual.
-- O workflow de CD pode usar acesso temporario SSH /32 ao runner via `EC2_SECURITY_GROUP_ID` e credenciais curtas `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`. A revogacao exata e tentada no encerramento; validar o Security Group apos cada job, pois cancelamento forcado ou credenciais expiradas podem deixar regra residual.
+- Flask/SQLite com GET `/health`, `/version`, `/tasks`; POST `/tasks`; PATCH e DELETE `/tasks/<id>`.
+- DELETE retorna 204 vazio quando exclui e 404 JSON quando a tarefa não existe. `/version` identifica `cloud-tasks-api` versão `1.1.0`.
+- Nove testes cobrem API, versão e persistência com recriação da aplicação usando o mesmo banco. A CI executa testes e build; a publicação de imagem ocorre na main, e o CD aguarda CI aprovada.
+- GitHub `production` e secrets/variables requeridos foram configurados de forma segura. Credenciais não estão neste repositório.
 
-## Infraestrutura prevista
+## Infraestrutura e verificação remota
 
-Regiao: us-east-1; Ubuntu 24.04 x86_64. O inventario inicial somente leitura nao
-encontrou instancias nos estados consultados; depois, o host criou a instancia
-`i-0c6f23086bc98c45e`, IP `54.198.190.67`, security group `sg-09352ffbaa35709b2`.
-Porta HTTP 80 para validacao; SSH 22 apenas
-de origem confiavel. O runner precisa de acesso autorizado, conforme guia docente.
-O deploy usa volume nomeado `cloud-tasks-data` e banco `/data/tasks.db`.
-EC2_USER e uma variable do Actions; os demais EC2_* sao secrets, conforme README.
+Conta AWS `109347287884`, região `us-east-1`. EC2 Ubuntu 24.04 `i-0c6f23086bc98c45e`, tipo `t3.micro`, IP `54.198.190.67`, Security Group `sg-09352ffbaa35709b2`. Cloud-init concluiu e Docker 29.1.3 foi confirmado via SSH.
 
-## Verificacoes e limitacoes observadas
+Verificações após o deploy: `/health` respondeu status `ok`; `/version` respondeu `cloud-tasks-api` / `1.1.0`; DELETE respondeu 204 e, repetido para o mesmo ID, 404. A tarefa ID 1, título `Evidencia persistencia 20261116-113828`, permaneceu disponível após substituir o contêiner com `scripts/deploy.sh` usando a mesma imagem e volume `cloud-tasks-data`. IDs dos contêineres antes/depois, imagem e respostas estão em [evidencia-ec2.json](evidencia-ec2.json).
 
-- Harness no host: pytest 9 passed em 0.73s.
-- Dependencias instaladas: `uv pip check --python .venv/Scripts/python.exe`: 15 pacotes compativeis.
-- Os YAML de Compose e dos dois workflows foram analisados sintaticamente; isso nao equivale a validacao por Docker Compose ou execucao no GitHub Actions. O TOML de `.codex/config.toml` foi analisado.
-- Sintaxe dos tres scripts shell validada separadamente com Git Bash; `scripts/inspect-aws.ps1` passou analise do parser PowerShell.
-- Testes mockados de `scripts/runner-ssh-access.sh` passaram pelo harness; AWS CLI e consulta de IP foram simulados, sem chamadas AWS. O teste foi incluido no harness e na CI.
-- `scripts/provision-aws.ps1` passou analise de parser PowerShell; AWS CLI `--generate-cli-skeleton` aceitou argumentos representativos de `run-instances` (validacao offline).
-- `-Status` executado pelo usuario validou instancia/tag e obteve a chave publica de host do console AWS autenticado, gerando `known_hosts` fora do repositorio.
-- Build da imagem Ubuntu/Python 3.12 e smoke test local aprovados: health, version, DELETE e persistencia apos recriar container.
-- Containers e rede do harness foram removidos; volume `cloud-tasks-smoke-535_cloud-tasks-data` mantido para inspecao. Preservar esse volume; nao remove-lo durante limpeza automatica.
-- Persistencia local aprovada. Usuario confirmou via SSH cloud-init done e Docker cliente/servidor 29.1.3 (linux/amd64), acessivel como ubuntu. Aplicacao e persistencia em EC2 seguem pendentes.
-- Codigo ainda nao foi enviado ao GitHub. Workflows remotos, CI, GHCR e deploy nao foram verificados.
-- Inventario atualizado fornecido pelo usuario em 2026-11-16: EC2 running em us-east-1, Ubuntu 24.04 oficial, rota ativa via Internet Gateway, HTTP 80 publico e SSH 22 restrito ao IP administrativo /32. Custos nao verificados.
+A imagem implantada foi `ghcr.io/bingxyi/cloud-pipeline-aws:fedf0295356db273686130be3bdf76c3c5d5d87e`, digest `sha256:ffc8f538af5aded1bafa37990154782112803de8faf162a8a3e0615d1fb6af7e`.
 
-## Evidencias externas pendentes
+Ao final da verificação, as regras do Security Group eram SSH 22 de `189.6.11.151/32` e HTTP 80 de `0.0.0.0/0`; a regra temporária do runner foi removida. A instância permanece ligada para demonstração. Custos não foram inspecionados e a limpeza após a apresentação está pendente.
 
-| Evidencia | Estado |
-|---|---|
-| URL do repositorio | Informada; codigo ainda nao enviado |
-| Integrante e matricula | Rafael Bitu Castro de Abreu, RA22301190 |
-| PR com revisao e CI aprovada | Pendente |
-| Imagem GHCR publica com SHA | Pendente |
-| CD aprovado e HTTP /health | Pendente |
-| GET /tasks antes/depois de recriar container | Pendente |
-| Inventario AWS, custos e encerramento | Pendente |
-| Harness local: pytest, build, API e persistencia do container | Aprovado |
+## Histórico e pendências
 
-O host informa a criacao da EC2 acima; esta atualizacao documental nao fez alteracoes AWS. Custos nao foram verificados. Apos a demonstracao, registrar IDs dos recursos,
-encerrar a instancia e verificar volumes/IPs remanescentes no console, guardando
-evidencias sem credenciais. Nao registrar encerramento sem verificacao real.
+Uma tentativa inicial de SSH pelo ambiente Codex não conseguiu ler a chave local. Depois, a conexão foi confirmada pelo usuário via SSH; não é uma falha atual do host. O manifest da imagem base foi consultado anonimamente na EC2 com configuração Docker vazia antes do deploy.
+
+- [ ] Inspecionar e registrar custos AWS.
+- [ ] Realizar apresentação e manter evidências da entrega.
+- [ ] Encerrar a EC2 após a demonstração e verificar volumes e IPs restantes.
