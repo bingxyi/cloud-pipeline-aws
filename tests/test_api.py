@@ -37,3 +37,37 @@ def test_mark_done(client):
 
 def test_not_found(client):
     assert client.patch("/tasks/999", json={"done": True}).status_code == 404
+
+
+def test_delete_task_returns_no_content_and_removes_task(client):
+    item = client.post("/tasks", json={"title": "Remover"}).json
+
+    result = client.delete(f'/tasks/{item["id"]}')
+
+    assert result.status_code == 204
+    assert result.data == b""
+    assert client.get("/tasks").json == []
+
+
+def test_delete_missing_task_returns_json_404(client):
+    result = client.delete("/tasks/999")
+
+    assert result.status_code == 404
+    assert result.json == {"error": "tarefa nao encontrada"}
+
+
+def test_version(client):
+    result = client.get("/version")
+
+    assert result.status_code == 200
+    assert result.json == {"service": "cloud-tasks-api", "version": "1.1.0"}
+
+
+def test_tasks_persist_when_app_is_recreated(tmp_path):
+    database = str(tmp_path / "persistent.db")
+    first_app = create_app({"TESTING": True, "DATABASE": database})
+    item = first_app.test_client().post("/tasks", json={"title": "Persistir"}).json
+
+    recreated_app = create_app({"TESTING": True, "DATABASE": database})
+
+    assert recreated_app.test_client().get("/tasks").json == [item]
