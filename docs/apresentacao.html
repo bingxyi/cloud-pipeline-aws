@@ -24,47 +24,47 @@
 <main class="deck" aria-label="Apresentação Cloud Tasks API">
 <div class="progress" id="progress" aria-hidden="true"></div>
 <section class="slide active" aria-labelledby="s1" aria-roledescription="slide">
-  <div class="eyebrow">Critério 1 · Git, branches, PR e organização</div>
+  <div class="eyebrow">Computação em nuvem · Arquitetura de serviços</div>
   <h1 id="s1">Cloud Tasks<br><span class="accent">API</span></h1>
-  <p class="lede">Da alteração revisada à aplicação implantada na AWS, com persistência demonstrada.</p>
-  <div class="pillrow"><span class="pill">Rafael Bitu Castro de Abreu</span><span class="pill">RA22301190</span><span class="pill">4 min 30 s</span></div>
-  <div class="grid three" style="margin-top:34px"><div class="card"><div class="big-stat">PR #1</div><div class="small-label">mesclado em <code>main</code></div></div><div class="card"><div class="big-stat">CI + CD</div><div class="small-label">aprovados para a revisão implantada</div></div><div class="card"><div class="big-stat">EC2</div><div class="small-label">API acessível e persistência comprovada</div></div></div>
-  <p class="meta" style="margin-top:22px"><a href="https://github.com/bingxyi/cloud-pipeline-aws/pull/1">PR #1 · feature</a> mesclado em <code>fedf0295356db273686130be3bdf76c3c5d5d87e</code>.<br><a href="https://github.com/bingxyi/cloud-pipeline-aws/pull/3">PR #3 · documentação</a>; snapshot implantado na auditoria: <code>57e2869681c5844205272fc67c3733817f5cd390</code>.</p>
+  <p class="lede">Arquitetura, integração contínua, implantação e persistência de uma API de tarefas.</p>
+  <div class="pillrow"><span class="pill">Rafael Bitu Castro de Abreu</span><span class="pill">RA22301190</span><span class="pill">Engenharia da Computação</span></div>
+  <div class="grid three" style="margin-top:34px"><div class="card"><div class="big-stat">Flask</div><div class="small-label">API HTTP · SQLite</div></div><div class="card"><div class="big-stat">CI/CD</div><div class="small-label">testes, imagem e implantação</div></div><div class="card"><div class="big-stat">EC2</div><div class="small-label">contêiner e volume persistente</div></div></div>
+  <p class="meta" style="margin-top:22px">A funcionalidade foi integrada pelo <a href="https://github.com/bingxyi/cloud-pipeline-aws/pull/1">PR #1</a>, merge <code>fedf0295356db273686130be3bdf76c3c5d5d87e</code>. O <a href="https://github.com/bingxyi/cloud-pipeline-aws/pull/3">PR #3</a> atualizou a documentação; snapshot de implantação avaliado: <code>57e2869681c5844205272fc67c3733817f5cd390</code>.</p>
 </section>
 <section class="slide" aria-labelledby="s2" aria-roledescription="slide" aria-hidden="true">
-  <div class="eyebrow">Critério 6 · Evolução funcional</div><h2 id="s2">Serviço ativo<br>na <span class="accent">EC2</span></h2>
-  <div class="split"><div><p class="lede">Flask + SQLite. Endpoints verificados no host público; as chamadas abaixo são somente leitura.</p><pre><code>curl.exe -i http://54.198.190.67/health
+  <div class="eyebrow">Arquitetura e interface HTTP</div><h2 id="s2">Execução remota<br>na <span class="accent">EC2</span></h2>
+  <div class="split"><div><p class="lede">Cliente HTTP → Flask/Gunicorn → SQLite em volume Docker. As consultas abaixo são somente leitura.</p><pre><code>curl.exe -i http://54.198.190.67/health
 curl.exe -i http://54.198.190.67/version
 curl.exe -i http://54.198.190.67/tasks</code></pre></div>
   <div class="grid" style="grid-template-columns:1fr"><div class="card"><span class="status">HTTP 200 · health</span><p style="margin-top:16px"><code>{"status":"ok"}</code></p></div><div class="card"><span class="status">Versão verificada</span><p style="margin-top:16px"><code>cloud-tasks-api · 1.1.0</code></p></div></div></div>
 </section>
 <section class="slide" aria-labelledby="s3" aria-roledescription="slide" aria-hidden="true">
-  <div class="eyebrow">Critérios 2 e 6 · Testes e evolução funcional</div><h2 id="s3">Comportamento<br><span class="accent">testado</span></h2>
-  <div class="grid three"><div class="card"><div class="big-stat">204</div><h3>Excluiu</h3><p>Resposta vazia quando a tarefa existe.</p></div><div class="card"><div class="big-stat" style="color:var(--rose)">404</div><h3>Não existe</h3><p>Erro JSON para o ID removido.</p></div><div class="card"><div class="big-stat">9</div><h3>Testes</h3><p>API, validação, versão e persistência no mesmo banco.</p></div></div>
-  <div class="callout"><strong>Verificação remota:</strong> DELETE retornou 204 e, na repetição, 404. Resultado registrado; nenhuma exclusão será executada durante esta apresentação.</div>
+  <div class="eyebrow">Comportamento e estratégia de validação</div><h2 id="s3">Contrato da API<br><span class="accent">verificado</span></h2>
+  <div class="grid three"><div class="card"><div class="big-stat">204</div><h3>Exclusão</h3><p>Resposta sem corpo quando a tarefa existe.</p></div><div class="card"><div class="big-stat" style="color:var(--rose)">404</div><h3>Identificador ausente</h3><p>Resposta JSON quando a tarefa não existe.</p></div><div class="card"><div class="big-stat">9</div><h3>Testes automatizados</h3><p>Rotas, validação, versão e persistência da aplicação.</p></div></div>
+  <div class="callout"><strong>Evidência remota:</strong> o DELETE retornou 204 e, ao repetir a solicitação para o mesmo identificador, 404. As duas respostas também constam no registro técnico.</div>
 </section>
 <section class="slide" aria-labelledby="s4" aria-roledescription="slide" aria-hidden="true">
-  <div class="eyebrow">Critério 2 · Testes e CI nos PRs</div><h2 id="s4">Branch → PR → <span class="accent">main</span></h2>
+  <div class="eyebrow">Integração contínua e rastreabilidade</div><h2 id="s4">Branch → PR → <span class="accent">main</span></h2>
   <div class="flow" aria-label="Fluxo de revisão"><div class="node">Feature<small>alterações isoladas</small></div><div class="arrow" aria-hidden="true">→</div><div class="node">Pull request<small>revisão e CI</small></div><div class="arrow" aria-hidden="true">→</div><div class="node">Main<small>commit integrado</small></div></div>
-  <div class="grid"><div class="card"><h3>CI aprovada</h3><p>Pytest, validação simulada do acesso SSH e build Docker.</p><p style="margin-top:14px"><a href="https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43886754600">CI do PR #1 ↗</a><br><a href="https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43889934062">CI main, snapshot auditado ↗</a></p></div><div class="card"><h3>Revisão registrada</h3><p><a href="https://github.com/bingxyi/cloud-pipeline-aws/pull/1">PR #1 · funcionalidade ↗</a><br><a href="https://github.com/bingxyi/cloud-pipeline-aws/pull/3">PR #3 · documentação ↗</a></p><p style="margin-top:12px">Snapshot auditado:<br><code>57e2869681c5844205272fc67c3733817f5cd390</code></p></div></div>
+  <div class="grid"><div class="card"><h3>Execuções aprovadas</h3><p>A CI executa pytest, teste simulado da regra SSH e build Docker. A publicação é restrita à branch principal.</p><p style="margin-top:14px"><a href="https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43886754600">CI do PR #1 ↗</a><br><a href="https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43889934062">CI da main, snapshot analisado ↗</a></p></div><div class="card"><h3>Histórico de alterações</h3><p><a href="https://github.com/bingxyi/cloud-pipeline-aws/pull/1">PR #1 · funcionalidade ↗</a><br><a href="https://github.com/bingxyi/cloud-pipeline-aws/pull/3">PR #3 · documentação ↗</a></p><p style="margin-top:12px">Merge funcional: <code>fedf0295356db273686130be3bdf76c3c5d5d87e</code><br>Snapshot implantado analisado:<br><code>57e2869681c5844205272fc67c3733817f5cd390</code></p></div></div>
 </section>
 <section class="slide" aria-labelledby="s5" aria-roledescription="slide" aria-hidden="true">
-  <div class="eyebrow">Critério 3 · Docker e GHCR versionado</div><h2 id="s5">A mesma revisão<br>vira <span class="accent">imagem</span></h2>
-  <div class="card" style="margin-bottom:18px"><p class="meta">GHCR · tag por SHA</p><p style="font-size:clamp(15px,1.6vw,21px);margin-bottom:0"><code>ghcr.io/bingxyi/cloud-pipeline-aws:57e2869681c5844205272fc67c3733817f5cd390</code></p></div>
+  <div class="eyebrow">Empacotamento e distribuição</div><h2 id="s5">A revisão gera<br>uma <span class="accent">imagem</span></h2>
+  <div class="card" style="margin-bottom:18px"><p class="meta">GHCR · referência do snapshot implantado analisado</p><p style="font-size:clamp(15px,1.6vw,21px);margin-bottom:0"><code>ghcr.io/bingxyi/cloud-pipeline-aws:57e2869681c5844205272fc67c3733817f5cd390</code></p></div>
   <div class="grid three"><div class="card"><div class="big-stat">Ubuntu</div><div class="small-label">24.04 · EC2 t3.micro</div></div><div class="card"><div class="big-stat">Docker</div><div class="small-label">29.1.3 · imagem no GHCR</div></div><div class="card"><div class="big-stat">SQLite</div><div class="small-label">/data/tasks.db · volume cloud-tasks-data</div></div></div>
-  <p class="meta" style="margin-top:18px">Manifest GHCR acessado anonimamente na EC2 antes do deploy.</p>
+  <p class="meta" style="margin-top:18px">O manifest GHCR foi acessado anonimamente na EC2 antes da implantação. O digest da imagem é registrado em <a href="evidencia-ec2.json">evidencia-ec2.json ↗</a>.</p>
 </section>
 <section class="slide" aria-labelledby="s6" aria-roledescription="slide" aria-hidden="true">
-  <div class="eyebrow">Critérios 4 e 5 · EC2, rede, segurança e CD</div><h2 id="s6">CI aprovada.<br><span class="accent">Deploy validado.</span></h2>
+  <div class="eyebrow">Infraestrutura, segurança e implantação</div><h2 id="s6">CI aprovada.<br><span class="accent">Deploy validado.</span></h2>
   <div class="flow" aria-label="Fluxo de implantação"><div class="node">CI aprovada<small>workflow_run</small></div><div class="arrow" aria-hidden="true">→</div><div class="node">GHCR por SHA<small>imagem vinculada</small></div><div class="arrow" aria-hidden="true">→</div><div class="node">EC2<small>health check</small></div></div>
   <p class="meta"><a href="https://github.com/bingxyi/cloud-pipeline-aws/actions/runs/43890085299">Abrir execução CD aprovada ↗</a></p>
-  <div class="grid"><div class="card"><h3>Secrets protegidos</h3><p>Ambiente GitHub <code>production</code>; valores não são exibidos nem guardados no repositório.</p></div><div class="card"><h3>Security Group</h3><p>SSH 22: <code>189.6.11.151/32</code><br>HTTP 80: público para demonstração.<br>Regra temporária do runner revogada.</p></div></div>
+  <div class="grid"><div class="card"><h3>Configuração de deploy</h3><p>Ambiente GitHub <code>production</code>; secrets fora do repositório. O CD valida o endpoint e revoga a regra temporária do runner.</p></div><div class="card"><h3>Rede da EC2</h3><p>Ubuntu 24.04 · <code>t3.micro</code><br>SSH 22: <code>189.6.11.151/32</code><br>HTTP 80: <code>0.0.0.0/0</code></p></div></div>
 </section>
 <section class="slide" aria-labelledby="s7" aria-roledescription="slide" aria-hidden="true">
-  <div class="eyebrow">Critério 7 · Documentação e apresentação</div><h2 id="s7">Contêiner novo.<br>Dados <span class="accent">preservados.</span></h2>
-  <div class="split"><div class="card"><p class="meta">Antes / depois do deploy</p><p><span class="mint">✓</span> Contêineres diferentes</p><p><span class="mint">✓</span> Volume mantido</p><p><span class="mint">✓</span> Tarefa ID 1 disponível</p><p style="margin-top:15px"><code>Evidencia persistencia<br>20261116-113828</code></p><p class="meta" style="margin-top:16px"><a href="evidencia-ec2.json">Abrir evidência JSON ↗</a></p></div>
-  <div><div class="card" style="margin-bottom:14px"><div class="big-stat" style="font-size:clamp(27px,3.5vw,48px)">US$ 0,0884789758</div><p style="margin-top:10px">Total da conta no Cost Explorer para 15–16 nov., medido em 16 nov. Não atribuído exclusivamente ao projeto e não necessariamente final.</p></div><p class="callout note">EC2 mantida ligada para demonstração. Conferir custos e limpar recursos depois.</p></div></div>
-  <p class="closing" style="margin-top:23px">API entregue, automação validada e persistência demonstrada.</p>
+  <div class="eyebrow">Resultados, custos e limitações</div><h2 id="s7">Persistência<br><span class="accent">observada</span></h2>
+  <div class="split"><div class="card"><p class="meta">Recriação do contêiner e volume preservado</p><p>O ID 1 e o título <code>Evidencia persistencia 20261116-113828</code> permaneceram disponíveis.</p><p style="margin-top:14px">Os contêineres anterior e posterior têm identificadores distintos; consulte <a href="evidencia-ec2.json">o registro dos dados ↗</a>.</p><p style="margin-top:14px">A persistência não cobre perda ou exclusão do volume.</p></div>
+  <div><div class="card" style="margin-bottom:14px"><div class="big-stat" style="font-size:clamp(27px,3.5vw,48px)">US$ 0,0884789758</div><p style="margin-top:10px">UnblendedCost estimado para 15–16 nov. na conta inteira. Não é custo atribuído ao projeto nem necessariamente a fatura final.</p></div><p class="callout note">Não foram medidos desempenho, latência ou carga concorrente. O snapshot de custos é sujeito a consolidação posterior.</p></div></div>
+  <p class="closing" style="margin-top:23px">A persistência foi observada durante a substituição do contêiner com o volume mantido.</p>
 </section>
 <nav class="controls" aria-label="Controles dos slides"><button type="button" id="prev" aria-label="Slide anterior" title="Anterior (←)">←</button><span class="counter" id="counter" aria-live="polite">01 / 07</span><button type="button" id="next" aria-label="Próximo slide" title="Próximo (→)">→</button></nav>
 <div class="hint" aria-hidden="true">← → navegar · Home/End início/fim · Ctrl+P PDF</div>
